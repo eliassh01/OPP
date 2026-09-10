@@ -1,0 +1,50 @@
+matthew.khoury
+eliasshub.1249
+
+--------------------------------------------------------------------------------------------------------------
+Difference between the two uml designs:
+
+    The before uml has one class that we didn't think we need at the beginning and one class we thought we
+needed and at the end we got rid of.
+The Difference is that the before uml design has a Stem class and does not have the numericEnergyCounter class
+where the after uml design does not have a stem class and has numericEnergyCounter class.
+
+--------------------------------------------------------------------------------------------------------------
+Open world:
+
+    There are two things that had to be dealt with in an open world, (1)) terrain (2) trees, we implemented
+them differently.
+(1) Terrain: the terrain implemented in a way where there are no blocks outside of the frame we see as a
+             a player, and as the avatar walks left or right the terrain is being built in run time and the
+             blocks that gets outside of the frame gets removed from teh game objects.
+             using a hash function insures us when we build the terrain back again it will be the same shape.
+             for example if the avatar moves right then every ground block on the left side that got outside
+             of the frame gets removed and every empty spaces on the right that hes gonna reach gets build
+             instantly with new blocks
+(2) Trees:  on the other hand the trees implemented in a way that they exists from the beginning and until the
+            game ends and the user closes it,meaning the trees never gets deleted and recreated.
+
+--------------------------------------------------------------------------------------------------------------
+Tree Package:
+
+    initially we thought we need 3 classes: Stem, Leaf and tree where Tree instance uses instances of Leaf and
+Stem combined. After a secondary thought we found out that there is no specific and special use of a stem
+instance and that it doesn't have special characteristics that makes it different which lead to creating the
+stem inside the class tree and where instances of leaf also created.
+
+--------------------------------------------------------------------------------------------------------------
+Design Dilemmas:
+
+(1).Designing the character where is the wand too outside his body borders or not, which can lead to
+unexpected behaviour when coming to an empty block between two blocks.
+(2).In open world the dilemma was if the trees should be deleted and recreated, but that would make issues
+with deleting the leaves of the tree, for example if the tree gets deleted because the stem is already out of
+frame but the leaves are still in the frame, then suddenly the leaves disappear and the player would notice,
+leading to the decision that trees would always exist
+
+--------------------------------------------------------------------------------------------------------------
+Bonus:
+
+    we did a character design of the avatar using an 8 bit website to draw it, so it would fit the game design.
+we designed harry potter character where when the character flies he flies on a broomstick
+
