@@ -1,0 +1,66 @@
+
+Ex4 Part 1
+The two main functions in my program is convertImageToAscii which is private and
+chooseChars which is public. in chooseChars, I initialise an array containing the
+brightnesses of the letters (Characters) we have using a private method that passes through
+all the letters, on each one it calculates its brightness by counting the number of trues
+in its boolean representation. Then I do a linearStretching for these brightnesses values
+using an equation given. So now , we have an array of letters and an array of brightnesses,
+such that the brightness at index i is the brightness of the letter at index i in the array 
+of letters, so I didn't sort the array of brightnesses. Then I called convertImageToAscii method
+that takes these two arrays and numCharsInRow. It cuts the image to subImages, and on each
+subImage, I calculate its average brightness, and then I find the letter with the closest
+brightness to it by this way: I did a loop on the array of brightnesses each time
+checking for smaller difference, and then I find the smallest difference between a brightness
+and the subImage, so that, if the brightness causing the smallest difference is at index i,
+then the letter matching this brightness is at index i in the array of letters.
+then I add this letter in the right place in the asciiArt two-dimensional array 
+using relevant indexes. Then I return this array.
+
+EX4 part 2
+
+In the BrightnessImgCharMatcher class, I did the same thing as in Part 1, but I added
+a hashmap that can store the brightnesses of the subImages, so that if we want to
+convert the image to an asciiArt one more time, we don't need to calculate the brightness
+of each subImage again.
+In the shell I used Hashset to store the letters we have, because in HashSet there are
+no duplicates, and removing a letter from it and checking if a letter in it takes O(1).
+
+findDuplicate algorithm:
+ 1) Correctness:
+  Each new element in the sequence is an element in numList at the index of the previous
+  element. So, starting from numList[0], a linked list with a cycle is produced. There is 
+  cycle because numList contains duplicate element and this element is the start of the cycle.
+  so the algorithm uses two pointer, one that is faster than the other. the faster enters the 
+  cycle first, and then the slower, and since it is moving slower they will intersect at some 
+  point. now move the slowPointer to the starting point of the sequence and the faster remains
+  within the cycle, and move both with the same speed, they will intersect in the cycle entrance
+  which is the duplicate.
+ 2) Time complexity:
+  n = numList.length. In the first loop we have two pointer, one faster than the other.
+  They move around a cycle with length of maximum n. speed of faster pointer = 2 * slower one,
+  so for sure the number of steps they will do until intersection is O(n). In the second loop,
+  we have two pointer moving at the same speed until they intersect, so for sure this is O(n),
+  so time Complexity = 2O(n) = O(n) (because all other things are O(1)).
+
+uniqueMorseRepresentations algorithm:
+ 1) Correctness:
+  I initialized a HashSet.I moved using a loop on the array of words we have. For each word,I build
+  a morse word that matches it. the letters a-z has asciiValues starts from 97-122, so to get
+  the morse letter that matches a char i did morseTable[charAscii - 97]. then I add the morse
+  word to the Set. if two identical morse words are added to the set, they ara considered as one
+  because there is no repetition in Sets. so at the end Set.size() will be the number of unique Morse
+  words that are in the array of words.
+ 2) Time complexity:
+  n = words.length.
+  I build the morseTable then initialized a HashSet. Then I did a loop that passes through
+  the arrays of words (loop of length n), for every iteration, I initialized a
+  StringBuilder, and then I did a loop that passes through the letters in each word (loop of
+  length = length of the word), each time appending a morse letter to the StringBuilder (append
+  takes constant time). and then I added the morse word to the Set (O(1)). So we have two loops,
+  one of length n (number of words we have) and inside it a loop with a length equals to the 
+  length of the word. so the time complexity = O(number of words * length of each word).
+   
+
+
+
