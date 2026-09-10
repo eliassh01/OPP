@@ -1,0 +1,84 @@
+eliasshub.1249
+
+Exercise part 1:
+=============================
+=      File description     =
+=============================
+BrickerGameManager.java - implements the BrickGameManager class which contains
+ the main method and extends GameManager class.
+bricked_strategies package - contains the class CollisionStrategy.
+CollisionStrategy.java - implements the ColissionStrategy class.
+gameobjects package - contains the files: Ball, Brick, Paddle,
+ GraphicaLifeCounter and NumericalLifeCounter. each one of them 
+ implements the relevant class and extends GameObject class.
+
+=============================
+=          Design           =
+=============================
+I implemented the BrickerGameManager class so that it contains the initializer method 
+Which is responsible for creating all the gameobjects needed for the game. It also
+contains update method which run every frame update (each gameobject class has a Constructor 
+and update method).
+bricked_strategies package contains CollisionStrategy class which is responsible for
+Cases when ball collides with brick.
+I used this design following the design of DanoGameLab.
+I designed BrickerGameManager in this way so that I will not be forced to call all the 
+Constructors of all classes in the main, so that there will be only one class which is 
+Responsible for initializing all objects in the game so that only this class will be 
+called in the main.
+Add to that, the update method in BrickerGameManager will be responsible for updating all 
+what is on screen.
+I added the CollisionStrategy class so that it will be responsible of removing bricks when 
+A ball hits them, in order to not do this in Brick class which is not responsible for
+collisions.
+
+Exercise part 2:
+I wrote CollisionStrategy interface. I also wrote a RemoverBrickStrategyDecorator, this decorator
+is an abstract class. This abstract class implements the CollisionStrategy interface , and then,
+all the Strategies we have in the game (except the RemoveBrickStrategy) extends the
+RemoverBrickStrategyDecorator.
+The RemoveBrickStrategy which is responsible for removing a brick when it collides only
+implements the CollisionStrategy interface. At the start of the game, every brick has a
+specific Strategy,this strategy is taken randomly by BrickStrategyFactory, which gives
+ a random Strategy.
+Each of these Strategies is given as a parameter RemoveBrickStrategy object which is use by
+the RemoverBrickStrategyDecorator decorator to remove The brick, 
+in addition to what the Strategy do other than removing the brick.
+Each strategy adds an appropriate gameObject.
+I used this implementation following the API we have in the exercise and DanoGameLab.
+
+Algorithms:
+
+1)alotStudyTime:
+ i)n = tasks.length, m = timeSlots.length.
+   first, i sorted the tasks and timeSlots in an ascending order. i moved in a while loop with one
+   index on each array. If timeSlots[i] >= tasks[j], I add 1 to the number of tasks we can make.
+   So if the arrays length is 1, so it is clear that the method will work. Assume that the
+   method will Work on task length of n-1, so we compare all the time slots we didn't check them, 
+   If one j index timeSlots[j] >= tasks[n], we add 1. And then we exit the loop (increase i by 1).
+   Else, we increase index j by one and, we don't change the number of tasks, and exit the loop.
+ ii)Time complexity: we have a loop that ends when one of the indexes reaches n = tasks.length,
+    or m = timeSlots.length. In each loop we increase at least one of the indexes by 1.
+    so we are looping on a loop of length of min(n , m). I sorted the two arrays, the sorting 
+    I used works in O(nlog(n)) which is larger. So the time complexity is O(nlog(n) + mlog(m)).
+   
+2)minLeap:
+ ii)Time Complexity:
+    The longest thing we do is a loop of length n = leapNum.length.
+    all other operations are O(1) so we Get O(n).
+
+3)bucketWalk:
+ i)the base case is when there is 0,1 or 2 liters of water in well.
+   For 0,1 we return 1. For 2 we return 2.I use here dynamic programming, i defined an array sums.
+   Define sums[n] to be the number of ways to fill trough with n liters. I saw that sums[n] =
+   sums[n-1] + sums[n-2]. So i wrote a loop, each time doing sums[j] = sums[j-1] + sums[j-2].
+   if we assumed that the algorithm work for n-1 and n-2, so in the last Iteration in the loop
+   we will have sums[n] = sums[n-1] + sums[n-2], and so we return sums[n].
+ ii)Time complexity: we have a loop of length n, so the time is O(n).(all other operations are O(1).
+
+4)
+ i)numTrees: I did something similar to bucketWalk, for every 1 <= n <= 19,
+ numOfTrees[n] = numOfTrees[0] * numOfTrees[n-1] + numOfTrees[1] * numOfTrees[n-1]
+ + ... + numberOfTrees[n-1] * numberOfTrees[0].
+ So we did a loop that matches this.
+ ii)Time compexity: we have a loop inside a loop, so O(n^2).
